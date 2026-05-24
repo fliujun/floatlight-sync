@@ -1,0 +1,13 @@
+{
+  "": {
+    "dependencies": "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/FloatlightSync.d",
+    "object": "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/FloatlightSync.o",
+    "swift-dependencies": "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/primary.swiftdeps"
+  },
+  "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/Sources/main.swift": {
+    "object": "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main.swift.o",
+    "swiftmodule": "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main.swiftdeps",
+    "diagnostics": "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main.dia"
+  }
+}

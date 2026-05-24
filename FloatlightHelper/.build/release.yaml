@@ -1,0 +1,66 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "FloatlightSync-x86_64-apple-macosx-release.exe": ["<FloatlightSync-x86_64-apple-macosx-release.exe>"]
+  "FloatlightSync-x86_64-apple-macosx-release.module": ["<FloatlightSync-x86_64-apple-macosx-release.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<FloatlightSync-x86_64-apple-macosx-release.exe>","<FloatlightSync-x86_64-apple-macosx-release.module>"]
+  "test": ["<FloatlightSync-x86_64-apple-macosx-release.exe>","<FloatlightSync-x86_64-apple-macosx-release.module>"]
+default: "main"
+nodes:
+  "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/Sources/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/Sources/main.swift"]
+    outputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/sources"]
+    description: "Write auxiliary file /Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/sources"
+
+  "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main.swift.o"]
+    outputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.product/Objects.LinkFileList"
+
+  "/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Library/Developer/CommandLineTools/usr/bin/swiftc"]
+    outputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"
+
+  "<FloatlightSync-x86_64-apple-macosx-release.exe>":
+    tool: phony
+    inputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync"]
+    outputs: ["<FloatlightSync-x86_64-apple-macosx-release.exe>"]
+
+  "<FloatlightSync-x86_64-apple-macosx-release.module>":
+    tool: phony
+    inputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main.swift.o","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/Modules/FloatlightSync.swiftmodule"]
+    outputs: ["<FloatlightSync-x86_64-apple-macosx-release.module>"]
+
+  "C.FloatlightSync-x86_64-apple-macosx-release.exe":
+    tool: shell
+    inputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main.swift.o","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.product/Objects.LinkFileList"]
+    outputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync"]
+    description: "Linking ./.build/x86_64-apple-macosx/release/FloatlightSync"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-L","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release","-o","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync","-module-name","FloatlightSync","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-dead_strip","-Xlinker","-alias","-Xlinker","_FloatlightSync_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Library/Developer/CommandLineTools/usr/lib/swift-6.2/macosx","-target","x86_64-apple-macosx13.0","-framework","EventKit","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g"]
+
+  "C.FloatlightSync-x86_64-apple-macosx-release.module":
+    tool: shell
+    inputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/Sources/main.swift","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/sources"]
+    outputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/main.swift.o","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/Modules/FloatlightSync.swiftmodule"]
+    description: "Compiling Swift Module 'FloatlightSync' (1 sources)"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-module-name","FloatlightSync","-emit-dependencies","-emit-module","-emit-module-path","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/Modules/FloatlightSync.swiftmodule","-output-file-map","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/output-file-map.json","-whole-module-optimization","-num-threads","8","-c","@/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/FloatlightSync.build/sources","-I","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/Modules","-target","x86_64-apple-macosx13.0","-whole-module-optimization","-num-threads","8","-serialize-diagnostics","-O","-j8","-DSWIFT_PACKAGE","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/.build/x86_64-apple-macosx/release/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","FloatlightSync_main","-swift-version","5","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g","-Xcc","-isysroot","-Xcc","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-Xcc","-fPIC","-Xcc","-g","-package-name","floatlighthelper"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/Sources/","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/Package.swift","/Users/liujun/Documents/MyCat/改插件/浮光/native-helper/FloatlightHelper/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

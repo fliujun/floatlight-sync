@@ -119,7 +119,7 @@ class ReminderManager {
             "ekId": r.calendarItemIdentifier,
             "title": r.title ?? "",
             "isCompleted": r.isCompleted,
-            "flagged": r.isFlagged,
+            "flagged": r.priority == 1,
             "notes": r.notes ?? "",
             "creationDate": r.creationDate?.iso8601String ?? "",
             "modificationDate": r.lastModifiedDate?.iso8601String ?? ""
@@ -147,7 +147,7 @@ class ReminderManager {
         reminder.calendar = calendar
         reminder.title = title
         reminder.notes = notes
-        reminder.isFlagged = flagged
+        reminder.priority = flagged ? 1 : 0
 
         if let dueDateStr = dueDate, let date = Date.fromISO8601(dueDateStr) {
             reminder.dueDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
@@ -171,7 +171,7 @@ class ReminderManager {
 
         if let title = fields["title"] as? String { reminder.title = title }
         if let completed = fields["isCompleted"] as? Bool { reminder.isCompleted = completed }
-        if let flagged = fields["flagged"] as? Bool { reminder.isFlagged = flagged }
+        if let flagged = fields["flagged"] as? Bool { reminder.priority = flagged ? 1 : 0 }
         if let notes = fields["notes"] as? String { reminder.notes = notes }
 
         if let dueDate = fields["dueDate"] as? String {
@@ -215,7 +215,7 @@ class ReminderManager {
         for pluginItem in pluginReminders {
             let pluginId = pluginItem["pluginId"] as? String ?? ""
             let pluginTitle = pluginItem["title"] as? String ?? ""
-            let pluginSection = pluginItem["sectionTitle"] as? String ?? ""
+            let _ = pluginItem["sectionTitle"] as? String ?? ""
             let pluginModified = pluginItem["modifiedAt"] as? Double ?? 0
 
             // Try to match by title (+ section if available)
